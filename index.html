@@ -32,50 +32,84 @@
       background: url('assets/img/hero-img.jpg') center center no-repeat;
       background-size: cover;
       position: relative;
-      padding: 60px 0;
+      padding: 120px 0;
       color: #fff;
       text-align: center;
     }
+
     .hero h2 {
       font-size: 48px;
       font-weight: 700;
       margin-bottom: 20px;
     }
+
     .hero p {
       font-size: 24px;
       font-weight: 300;
     }
-    .about .skills-content {
-      margin-top: 30px;
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
     }
-    .about .skills-content ul {
+
+    .social-links a {
+      margin: 0 10px;
+      color: #fff;
+      font-size: 24px;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #ff5733;
+    }
+
+    .study-links {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .study-links ul {
       list-style: none;
       padding: 0;
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
     }
-    .about .skills-content ul li {
-      background: #f7f7f7;
-      color: #333;
-      padding: 10px 20px;
+
+    .study-links ul li {
       margin: 10px;
-      border-radius: 5px;
-      transition: all 0.3s;
     }
-    .about .skills-content ul li:hover {
+
+    .study-links ul li a {
+      text-decoration: none;
+      color: #333;
+      background: #f7f7f7;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .study-links ul li a:hover {
       background: #ff5733;
       color: #fff;
     }
-    .footer {
-      background: #f8f9fa;
-      padding: 30px 0;
-      text-align: center;
-      border-top: 1px solid #dee2e6;
+
+    .navbar-icons {
+      display: flex;
+      align-items: center;
     }
-    .footer .social-links a {
+
+    .navbar-icons a {
       margin: 0 10px;
-      color: #333;
-      font-size: 18px;
+      color: #fff;
+      font-size: 24px;
+      transition: color 0.3s;
+    }
+
+    .navbar-icons a:hover {
+      color: #ff5733;
     }
   </style>
 </head>
@@ -87,12 +121,16 @@
       <a href="index.html" class="logo d-flex align-items-center">
         <h1 class="sitename">MyPortfolio</h1>
       </a>
-      <nav id="navmenu" class="navmenu">
+      <nav id="navmenu" class="navmenu d-flex align-items-center">
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="navbar-icons">
+          <a href="https://github.com/kasinasm28" target="_blank"><i class="bi bi-github"></i></a>
+          <a href="https://www.linkedin.com/in/sriram-kasinadhuni" target="_blank"><i class="bi bi-linkedin"></i></a>
+        </div>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
     </div>
@@ -244,13 +282,12 @@
               <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
             </div>
             <div class="col-md-12 text-center">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
+              <!-- <div class="error-message" style="display:none;">An error occurred.</div> -->
+              <div class="sent-message" style="display:none;">Your message has been sent. Thank you!</div>
               <button type="submit">Send Message</button>
             </div>
           </div>
-        </form><!-- End Contact Form -->
+        </form>        
 
       </div>
 
@@ -261,13 +298,11 @@
   <footer id="footer" class="footer">
     <div class="container">
       <div class="copyright text-center">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">MyPortfolio</strong> <span>All Rights Reserved</span></p>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Tejaverse</strong> <span>All Rights Reserved</span></p>
       </div>
       <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-twitter"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        <a href=""><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/kasinasm28" target="_blank"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/sriram-kasinadhuni" target="_blank"><i class="bi bi-linkedin"></i></a>
       </div>
     </div>
   </footer>
@@ -294,30 +329,34 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-    document.querySelector('.php-email-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      var form = event.target;
-      var formData = new FormData(form);
+  document.querySelector('.php-email-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  var form = event.target;
+  var formData = new FormData(form);
 
-      fetch(form.action, {
-        method: form.method,
-        body: formData,
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.ok) {
-          document.querySelector('.sent-message').style.display = 'block';
-          form.reset();
-        } else {
-          document.querySelector('.error-message').textContent = data.error || 'An error occurred.';
-          document.querySelector('.error-message').style.display = 'block';
-        }
-      })
-      .catch(error => {
-        document.querySelector('.error-message').textContent = 'An error occurred. Please try again.';
-        document.querySelector('.error-message').style.display = 'block';
-      });
-    });
+  fetch(form.action, {
+    method: form.method,
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+  })
+  .then(data => {
+    document.querySelector('.sent-message').style.display = 'block';
+    // document.querySelector('.error-message').style.display = 'none';
+    // form.reset();
+  })
+  .catch(error => {
+    document.querySelector('.sent-message').style.display = 'none';
+  });
+});
+
+
   </script>
 
 </body>
